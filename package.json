@@ -5,11 +5,12 @@
     "start": "docker-compose up",
     "postinstall": "concurrently \"yarn install:front\" \"yarn install:server\"",
     "install:front": "(cd front && yarn install)",
-    "install:server": "(cd server && yarn install)"
+    "install:server": "(cd server && yarn install)",
+    "lint": "concurrently \"(cd server && yarn lint)\" \"(cd front && yarn lint)\""
   },
   "husky": {
     "hooks": {
-      "pre-commit": "concurrently -r \"yarn lint\" \"yarn tsc --noEmit\"",
+      "pre-commit": "yarn lint",
       "post-merge": "yarn"
     }
   },
