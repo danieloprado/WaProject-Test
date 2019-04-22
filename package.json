@@ -1,0 +1,13 @@
+{
+  "name": "waproject-ebay",
+  "license": "MIT",
+  "scripts": {
+    "start": "docker-compose up",
+    "postinstall": "concurrently \"yarn install:front\" \"yarn install:server\"",
+    "install:front": "(cd front && yarn install)",
+    "install:server": "(cd server && yarn install)"
+  },
+  "devDependencies": {
+    "concurrently": "4.1.0"
+  }
+}

@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+  server:
+    container_name: waproject-ebay-server
+    build:
+      context: ./server
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ./server:/server:cached
+      - ./server/docker/dev/start.sh:/usr/local/bin/start.sh:cached
+    ports:
+      - 3001:3000
+    environment:
+      - NODE_ENV=development
+
+  front:
+    container_name: waproject-ebay-front
+    build:
+      context: ./front
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ./front:/front:cached
+    ports:
+      - 3002:3000
+    environment:
+      - NODE_ENV=development
