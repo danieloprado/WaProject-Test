@@ -6,24 +6,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "concurrently -r \"yarn lint\" \"yarn tsc --noEmit\"",
-      "post-merge": "yarn"
-    }
+    "eject": "react-scripts eject",
+    "lint": "concurrently \"yarn tslint -p tsconfig.json -c tslint.json\" \"yarn tsc --noEmit\""
   },
   "dependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "rxjs": "6.4.0"
+  },
+  "devDependencies": {
     "@types/jest": "24.0.11",
     "@types/node": "11.13.6",
     "@types/react": "16.8.14",
     "@types/react-dom": "16.8.4",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "concurrently": "4.1.0",
     "react-scripts": "2.1.8",
-    "tslint": "^5.16.0",
-    "tslint-react": "^4.0.0",
+    "tslint": "5.16.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-react": "4.0.0",
     "typescript": "3.4.4"
   },
   "eslintConfig": {
