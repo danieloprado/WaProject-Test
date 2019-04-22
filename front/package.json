@@ -8,6 +8,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "concurrently -r \"yarn lint\" \"yarn tsc --noEmit\"",
+      "post-merge": "yarn"
+    }
+  },
   "dependencies": {
     "@types/jest": "24.0.11",
     "@types/node": "11.13.6",
