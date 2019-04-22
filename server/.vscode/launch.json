@@ -5,13 +5,12 @@
     "request": "attach",
     "name": "Debug",
     "address": "127.0.0.1",
-    "port": 9229,
+    "port": 3009,
     "protocol": "inspector",
     "restart": true,
     "sourceMaps": true,
-    "localRoot": "${workspaceRoot}",
-    "remoteRoot": "/src",
-    "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+    "localRoot": "${workspaceRoot}/src",
+    "remoteRoot": "/server/src",
     "skipFiles": [
       "${workspaceRoot}/node_modules/**/*.js",
       "<node_internals>/**/*.js"

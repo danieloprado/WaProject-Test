@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "yarn start:dev",
-    "start:dev": "yarn ts-node-dev --inspect --respawn --transpileOnly ./src/main.ts",
+    "start:dev": "yarn ts-node-dev --inspect=0.0.0.0:9229 --respawn --no-notify  --transpileOnly ./src/main.ts",
     "lint": "concurrently \"yarn tslint -p tsconfig.json -c tslint.json\" \"yarn tsc --noEmit\"",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,9 +20,12 @@
     "@nestjs/microservices": "6.0.4",
     "@nestjs/platform-express": "6.0.4",
     "@nestjs/websockets": "6.0.4",
+    "@sentry/node": "^5.1.0",
+    "app-module-path": "^2.2.0",
     "reflect-metadata": "0.1.13",
     "rimraf": "2.6.3",
-    "rxjs": "6.4.0"
+    "rxjs": "6.4.0",
+    "source-map-support": "^0.5.12"
   },
   "devDependencies": {
     "@nestjs/testing": "6.1.1",
