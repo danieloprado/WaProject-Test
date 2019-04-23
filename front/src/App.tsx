@@ -1,30 +1,29 @@
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import FormFieldsContext from '@react-form-fields/material-ui/components/Context';
+import ConfigBuilder from '@react-form-fields/material-ui/config/builder';
+import { theme } from 'assets/theme';
+import HomePage from 'components/Home';
+import Toast from 'components/Shared/Toast';
+import React, { Fragment, PureComponent } from 'react';
 
-import React, { Component } from 'react';
+const fieldConfig = new ConfigBuilder()
+  .build();
 
-import logo from './logo.svg';
-
-class App extends Component {
+export default class App extends PureComponent {
   render() {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className='App-link'
-            href='https://reactjs.org'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <FormFieldsContext config={fieldConfig}>
+          <Fragment>
+            <CssBaseline />
+
+            <Toast.Global />
+
+            <HomePage />
+          </Fragment>
+        </FormFieldsContext>
+      </MuiThemeProvider>
     );
   }
 }
-
-export default App;

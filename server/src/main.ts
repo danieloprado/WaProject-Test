@@ -16,7 +16,7 @@ async function bootstrap(): Promise<void> {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new ExceptionFilter(httpAdapter));
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 
 bootstrap();
