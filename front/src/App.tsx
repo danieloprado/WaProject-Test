@@ -6,6 +6,7 @@ import { theme } from 'assets/theme';
 import HomePage from 'components/Home';
 import Toast from 'components/Shared/Toast';
 import React, { Fragment, PureComponent } from 'react';
+import Alert from 'components/Shared/Alert';
 
 const fieldConfig = new ConfigBuilder()
   .build();
@@ -19,6 +20,7 @@ export default class App extends PureComponent {
             <CssBaseline />
 
             <Toast.Global />
+            <Alert.Global />
 
             <HomePage />
           </Fragment>
