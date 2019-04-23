@@ -92,7 +92,7 @@ export default class Alert extends React.Component<IProps, IState> {
         onClose={this.handleCancel}
         className={classes.root}
       >
-        <DialogTitle>{title || (confirmation ? 'Confirmação' : 'Atenção')}</DialogTitle>
+        <DialogTitle>{title || (confirmation ? 'Confirmation' : 'Alert')}</DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.content}>
             {message}
@@ -101,7 +101,7 @@ export default class Alert extends React.Component<IProps, IState> {
         <DialogActions>
           {confirmation &&
             <Button onClick={this.handleCancel} autoFocus>
-              Cancelar
+              Cancel
             </Button>
           }
           <Button autoFocus={!confirmation} onClick={this.handleOk} color='primary'>

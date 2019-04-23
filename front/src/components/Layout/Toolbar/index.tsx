@@ -11,7 +11,6 @@ interface IProps extends IStyledProps {
 @WithStyles(theme => ({
   root: {
     height: theme.variables.headerHeight,
-    marginTop: theme.variables.contentPadding * -1,
     marginBottom: theme.variables.contentPadding,
   },
   appBar: {

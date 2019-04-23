@@ -134,8 +134,8 @@ export abstract class ListComponent<P = {}, S extends IStateList = IStateList<an
     this.loadData();
   }
 
-  labelDisplayedRows = ({ from, to, count }: LabelDisplayedRowsArgs) => `${from}-${to} de ${count}`;
-  onChangePage = (event: any, page: number) => this.handlePaginate(page + 1);
+  labelDisplayedRows = ({ from, to, count }: LabelDisplayedRowsArgs) => `${from}-${to} of ${count}`;
+  onChangePage = (event: any, page: number) => this.handlePaginate(page);
   onChangeRowsPerPage = (event: any) => this.handlePaginate(this.state.params.page, Number(event.target.value));
 
   renderSearch = (props: Partial<FieldText['props']> = {}) => {
@@ -143,14 +143,12 @@ export abstract class ListComponent<P = {}, S extends IStateList = IStateList<an
 
     return (
       <FieldText
-        label='Pesquisar'
+        label='Search'
         value={term}
         onChange={this.handleChangeTerm}
         margin='none'
-        placeholder='Digite ao menos 3 caracteres...'
-        InputLabelProps={{
-          shrink: true
-        }}
+        placeholder='Type at least 3 characters...'
+        InputLabelProps={{ shrink: true }}
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
@@ -183,7 +181,7 @@ export abstract class ListComponent<P = {}, S extends IStateList = IStateList<an
         {loading && !items.length &&
           <TableRow>
             <TableCell className='empty' colSpan={numberOfcolumns}>
-              Carregando...
+              Loading...
             </TableCell>
           </TableRow>
         }
@@ -197,7 +195,7 @@ export abstract class ListComponent<P = {}, S extends IStateList = IStateList<an
         {!error && !items.length && !loading &&
           <TableRow>
             <TableCell colSpan={numberOfcolumns}>
-              <IconMessage icon={AlertCircleOutlineIcon} message='Nenhum item cadastrado...' />
+              <IconMessage icon={AlertCircleOutlineIcon} message='Empty List' />
             </TableCell>
           </TableRow>
         }

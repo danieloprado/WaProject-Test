@@ -10,7 +10,7 @@ interface IState {
 }
 
 let lastPromise = Promise.resolve();
-let globalToast: (message: string, timeout?: number) => Promise<void>;
+let globalToast: (message: string, error: any, timeout?: number) => Promise<void>;
 
 export default class ToastGlobalProvider extends PureComponent<{}, IState> {
   promiseResolve: () => void;
@@ -20,13 +20,13 @@ export default class ToastGlobalProvider extends PureComponent<{}, IState> {
     this.state = { opened: false };
   }
 
-  static async show(message: string, timeout?: number): Promise<void> {
+  static async show(message: string, error: any, timeout?: number): Promise<void> {
     if (!globalToast) throw new Error('Please, initialize an Toast.Global before');
 
     //prevent an Toast to overhide another
     return lastPromise = lastPromise.then(async () => {
       await new Promise(resolve => setTimeout(() => resolve(), 500));
-      return globalToast(message, timeout);
+      return globalToast(message, error, timeout);
     });
   }
 
@@ -35,10 +35,10 @@ export default class ToastGlobalProvider extends PureComponent<{}, IState> {
     globalToast = this.show;
   }
 
-  show = (message: string, timeout?: number): Promise<void> => {
+  show = (message: string, error: any, timeout?: number): Promise<void> => {
     const result = new Promise<void>(resolve => {
       this.promiseResolve = resolve;
-      this.setState({ opened: true, message, timeout });
+      this.setState({ opened: true, message, error, timeout });
     });
 
     result.then(() => this.setState({ opened: false }));
@@ -50,12 +50,13 @@ export default class ToastGlobalProvider extends PureComponent<{}, IState> {
   }
 
   render() {
-    const { opened, message, timeout } = this.state;
+    const { opened, message, error, timeout } = this.state;
 
     return (
       <Toast
         opened={opened}
         message={message}
+        error={error}
         timeout={timeout}
         onClose={this.handleClose}
       />

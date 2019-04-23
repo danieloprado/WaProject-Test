@@ -1,20 +1,24 @@
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import { WithStyles } from 'decorators/withStyles';
+import { errorMessageFormatter } from 'formatters/errorMessage';
 import CloseIcon from 'mdi-react/CloseIcon';
 import React, { PureComponent } from 'react';
+import { TOAST_DEFAULT_TIMEOUT, TOAST_ERROR_TIMEOUT } from 'settings';
 
 import ToastGlobalProvider from './global';
 
 interface IState {
   opened: boolean;
   message?: string;
+  isError?: boolean;
 }
 
 interface IProps {
   opened: boolean;
   message?: string;
   timeout?: number;
+  error?: Error;
   onClose: () => void;
   classes?: any;
 }
@@ -26,6 +30,9 @@ interface IProps {
       left: 'auto',
       right: '24px'
     }
+  },
+  contentError: {
+    background: theme.palette.error.main
   },
   close: {
     width: theme.spacing.unit * 4,
@@ -50,12 +57,17 @@ export default class Toast extends PureComponent<IProps, IState> {
 
     return {
       opened: nextProps.opened,
-      message: nextProps.message
+      message: nextProps.message || errorMessageFormatter(nextProps.error),
+      isError: !!nextProps.error
     };
   }
 
   static show(message: string, timeout?: number) {
-    return ToastGlobalProvider.show(message, timeout || 2000);
+    return ToastGlobalProvider.show(message, null, timeout || TOAST_DEFAULT_TIMEOUT);
+  }
+
+  static error(error: any) {
+    return ToastGlobalProvider.show(null, error, TOAST_ERROR_TIMEOUT);
   }
 
   handleClose = (event: any, reason: string) => {
@@ -64,7 +76,7 @@ export default class Toast extends PureComponent<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const { opened, message } = this.state;
+    const { opened, message, isError } = this.state;
     const { timeout, classes, onClose } = this.props;
 
     return (
@@ -75,6 +87,7 @@ export default class Toast extends PureComponent<IProps, IState> {
         onClose={this.handleClose}
         message={<span>{message}</span>}
         className={classes.wrapper}
+        ContentProps={{ className: isError ? classes.contentError : null }}
         action={[
           <IconButton
             key='close'

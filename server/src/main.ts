@@ -10,7 +10,10 @@ import { ApplicationModule } from 'modules';
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(ApplicationModule);
 
-  app.useGlobalPipes(new ValidationPipe({ disableErrorMessages: true }));
+  app.useGlobalPipes(new ValidationPipe({
+    disableErrorMessages: true
+  }));
+  app.enableCors();
 
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new ExceptionFilter(httpAdapter));
