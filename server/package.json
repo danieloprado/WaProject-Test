@@ -19,6 +19,7 @@
     "@nestjs/core": "6.0.4",
     "@nestjs/mongoose": "6.1.2",
     "@nestjs/platform-express": "6.0.4",
+    "@nestjs/swagger": "3.0.2",
     "@sentry/node": "5.1.0",
     "app-module-path": "2.2.0",
     "class-transformer": "0.2.0",
@@ -28,6 +29,7 @@
     "rimraf": "2.6.3",
     "rxjs": "6.4.0",
     "source-map-support": "0.5.12",
+    "swagger-ui-express": "4.0.2",
     "tslib": "1.9.3"
   },
   "devDependencies": {

@@ -19,7 +19,8 @@ export class SearchDefinitionService {
   }
 
   public async update(_id: string, model: SearchDefinitionValidation): Promise<ISearchDefinition> {
-    return this.searchDefinitionModel.updateOne({ _id }, model).exec();
+    await this.searchDefinitionModel.updateOne({ _id }, model).exec();
+    return await this.searchDefinitionModel.findById(_id).exec();
   }
 
   public async delete(_id: string): Promise<void> {
