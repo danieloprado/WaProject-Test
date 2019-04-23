@@ -4,10 +4,9 @@
   "scripts": {
     "prestart": "yarn",
     "start": "docker-compose up",
-    "dev": "concurrently \"npm:dev:front\" \"npm:dev:server\" \"npm:dev:database\"",
+    "dev": "concurrently \"npm:dev:front\" \"npm:dev:server\"",
     "dev:front": "(cd front && yarn start)",
-    "dev:server": "(cd server && yarn start:dev)",
-    "dev:database": "docker-compose -f docker-compose.dev.yml up",
+    "dev:server": "docker-compose -f docker-compose.dev.yml up",
     "postinstall": "concurrently \"yarn install:front\" \"yarn install:server\"",
     "install:front": "(cd front && yarn install)",
     "install:server": "(cd server && yarn install)",
