@@ -13,9 +13,13 @@ export class SearchDefinitionService {
     return await this.searchDefinitionModel.find().exec();
   }
 
-  public async save(model: SearchDefinitionValidation): Promise<ISearchDefinition> {
+  public async create(model: SearchDefinitionValidation): Promise<ISearchDefinition> {
     const data = await this.searchDefinitionModel.create(model);
     return data.save();
+  }
+
+  public async update(_id: string, model: SearchDefinitionValidation): Promise<ISearchDefinition> {
+    return this.searchDefinitionModel.updateOne({ _id }, model).exec();
   }
 
   public async delete(_id: string): Promise<void> {

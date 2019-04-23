@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ISearchDefinition, SearchDefinitionValidation } from 'schema/searchDefinition';
 
 import { SearchDefinitionService } from '../services/searchDefinition';
@@ -13,8 +13,13 @@ export class SearchDefinitionController {
   }
 
   @Post()
-  public async save(@Body() model: SearchDefinitionValidation): Promise<any> {
-    return await this.appService.save(model);
+  public async create(@Body() model: SearchDefinitionValidation): Promise<any> {
+    return await this.appService.create(model);
+  }
+
+  @Put('/:id')
+  public async update(@Param('id') id: string, @Body() model: SearchDefinitionValidation): Promise<any> {
+    return await this.appService.update(id, model);
   }
 
   @Delete('/:id')
