@@ -13,10 +13,14 @@ services:
       - 3001:3001
       - 3009:9229
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - MONGO_DSN=mongodb://mongodb:27017/ebay
       - MONGO_HOST=mongodb
       - MONGO_PORT=27017
+      - EBAY_KEY=DanielPr-E-PRD-af2fb35bc-c4a44b17
+      - MAILGUN_FROM=
+      - MAILGUN_APIKEY=
+      - MAILGUN_DOMAIN=
     links:
       - mongodb
 
@@ -30,7 +34,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
 
   mongodb:
     container_name: waproject-ebay-mongo

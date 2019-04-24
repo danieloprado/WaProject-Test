@@ -2,3 +2,4 @@ node_modules
 .git
 .DS_Store
 .docker-data
+output-emails

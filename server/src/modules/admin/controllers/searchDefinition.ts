@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, HttpException, Param, Post, Put } from '@nestjs/common';
-import mongoose from 'mongoose';
-import { ISearchDefinition, SearchDefinitionValidation } from 'schema/searchDefinition';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ISearchDefinition } from 'schema/searchDefinition';
+import { IdParamValidation } from 'validation/idParams';
+import { SearchDefinitionValidation } from 'validation/searchDefinition';
 
 import { SearchDefinitionService } from '../services/searchDefinition';
 
@@ -19,26 +20,12 @@ export class SearchDefinitionController {
   }
 
   @Put('/:id')
-  public async update(@Param('id') id: string, @Body() model: SearchDefinitionValidation): Promise<any> {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw new HttpException('Bad Request', 400);
-    }
-
-    const result = await this.appService.update(id, model);
-
-    if (!result) {
-      throw new HttpException('Not found', 404);
-    }
-
-    return result;
+  public async update(@Param() params: IdParamValidation, @Body() model: SearchDefinitionValidation): Promise<any> {
+    return await this.appService.update(params.id, model);
   }
 
   @Delete('/:id')
-  public async delete(@Param('id') id: string): Promise<any> {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw new HttpException('Bad Request', 400);
-    }
-
-    return await this.appService.delete(id);
+  public async delete(@Param() params: IdParamValidation): Promise<any> {
+    return await this.appService.delete(params.id);
   }
 }

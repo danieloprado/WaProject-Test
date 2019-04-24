@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ISearchDefinition, SearchDefinitionToken, SearchDefinitionValidation } from 'schema/searchDefinition';
+import { ISearchDefinition, SearchDefinitionToken } from 'schema/searchDefinition';
+import { SearchDefinitionValidation } from 'validation/searchDefinition';
 
 @Injectable()
 export class SearchDefinitionService {
@@ -19,11 +20,14 @@ export class SearchDefinitionService {
   }
 
   public async update(_id: string, model: SearchDefinitionValidation): Promise<ISearchDefinition> {
-    await this.searchDefinitionModel.updateOne({ _id }, model).exec();
-    return await this.searchDefinitionModel.findById(_id).exec();
+    const result = await this.searchDefinitionModel.findByIdAndUpdate(_id, model).exec();
+
+    if (!result) throw new NotFoundException();
+    return result;
   }
 
   public async delete(_id: string): Promise<void> {
-    await this.searchDefinitionModel.deleteOne({ _id });
+    const result = await this.searchDefinitionModel.deleteOne({ _id });
+    if (result.ok !== 1) throw new NotFoundException();
   }
 }
