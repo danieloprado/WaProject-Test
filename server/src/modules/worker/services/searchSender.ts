@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { ISearchDefinition, SearchDefinitionToken } from 'schema/searchDefinition';
 
 import { EbayApiService } from './ebay';
-import { EmailService } from './Email';
+import { EmailService } from './email';
 
 @Injectable()
 export class SearchSenderService {

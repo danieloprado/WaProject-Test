@@ -4,6 +4,9 @@
   "scripts": {
     "prestart": "yarn",
     "start": "docker-compose up",
+    "pretest": "yarn",
+    "test": "(cd server && yarn test)",
+    "test:cov": "(cd server && yarn test:cov)",
     "dev": "concurrently \"yarn dev:front\" \"yarn dev:server\" \"yarn dev:database\" -n \"FRONT,SERVER,MONGO\" -c \"bgMagenta,bgBlue,bgRed\"",
     "dev:front": "(cd front && yarn start)",
     "dev:server": "(cd server && yarn start:dev)",

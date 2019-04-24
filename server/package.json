@@ -8,11 +8,11 @@
     "dev": "yarn start:dev",
     "start:dev": "yarn ts-node-dev --inspect=0.0.0.0:9229 --respawn --no-notify  --transpileOnly ./src/main.ts",
     "lint": "concurrently \"yarn tslint -p tsconfig.json -c tslint.json\" \"yarn tsc --noEmit\"",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test": "cross-env NODE_PATH=./src jest",
+    "test:watch": "cross-env NODE_PATH=./src jest --watch",
+    "test:cov": "cross-env NODE_PATH=./src jest --coverage",
+    "test:debug": "cross-env NODE_PATH=./src node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "cross-env NODE_PATH=./src jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "6.0.4",
@@ -48,7 +48,9 @@
     "@types/pug": "2.0.4",
     "@types/supertest": "2.0.7",
     "concurrently": "4.1.0",
+    "cross-env": "^5.2.0",
     "jest": "24.7.1",
+    "mockingoose": "^2.13.0",
     "supertest": "4.0.2",
     "ts-jest": "24.0.2",
     "ts-node": "8.1.0",
